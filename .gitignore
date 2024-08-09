@@ -1,0 +1,4 @@
+.idea/**
+excluded/**
+node_modules/**
+out/**

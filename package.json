@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "pdf-lib": "^1.17.1"
+  }
+}
