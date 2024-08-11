@@ -63,14 +63,83 @@ function startServer() {
 }
 
 
-async function printCV(lang) {
+function getFilePath(version, outputName) {
+    let filePath = 'out/';
+    if (version === 'main') {
+        return filePath + outputName + '.pdf';
+    } else {
+        return filePath + version + '/' + outputName + '.pdf';
+    }
+}
+
+
+function createDirectoryIfNotExists(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdir(dirPath, {recursive: true}, (err) => {
+            if (err) {
+                console.error('Błąd podczas tworzenia katalogu:', err);
+            }
+        });
+    }
+}
+
+
+function getVersionsNames() {
+    return new Promise((resolve, reject) => {
+        const contentsPath = path.join(__dirname, 'contents');
+        fs.readdir(contentsPath, {withFileTypes: true}, (err, files) => {
+            if (err) {
+                return reject(err);
+            }
+
+            const folderNames = files
+                .filter(file => file.isDirectory())
+                .map(folder => folder.name);
+
+            resolve(folderNames);
+        });
+    });
+}
+
+
+function getLanguagesVersions(version) {
+    return new Promise((resolve, reject) => {
+        const versionPath = path.join(__dirname, 'contents/' + version + '/texts');
+        fs.readdir(versionPath, {withFileTypes: true}, (err, files) => {
+            if (err) {
+                return reject(err);
+            }
+
+            const folderNames = files
+                .filter(file => file.isDirectory())
+                .map(folder => folder.name);
+
+            resolve(folderNames);
+        });
+    });
+}
+
+
+async function printCVs(version) {
+    const languages = await getLanguagesVersions(version);
+    for (const lang of languages) {
+        await printCV(lang, version);
+    }
+}
+
+async function printCV(lang, version) {
     const language = lang.toUpperCase();
 
-    const name = fs.readFileSync('contents/texts/' + lang + '/name.txt', 'utf8')
+    const name = fs.readFileSync('contents/' + version + '/texts/' + lang + '/name.txt', 'utf8')
 
     const outputName = name.replace(/ /g, '_') + '_CV_' + language;
 
-    console.log(`Generating: ${outputName}`);
+    console.log(`Generating: ${outputName} (${version})`);
+
+    if (version !== 'main') {
+        const dirPath = path.join(__dirname, '/out/' + version)
+        createDirectoryIfNotExists(dirPath);
+    }
 
     const browser = await puppeteer.launch({
         headless: true,
@@ -79,10 +148,10 @@ async function printCV(lang) {
 
     const page = await browser.newPage();
 
-    await page.goto(`http://localhost:${port}/${templateFile}?lang=${lang}`, {waitUntil: 'networkidle2'});
+    await page.goto(`http://localhost:${port}/${templateFile}?lang=${lang}&version=${version}`, {waitUntil: 'networkidle2'});
 
     await page.pdf({
-        path: 'out/' + outputName + '.pdf',
+        path: getFilePath(version, outputName),
         format: 'A4',
         margin: {
             top: '0px',
@@ -96,12 +165,12 @@ async function printCV(lang) {
 
     await browser.close();
 
-    await addMetaData(outputName, lang, name);
+    await addMetaData(outputName, lang, name, version);
 }
 
 
-async function addMetaData(outputName, lang, name) {
-    const filePath = 'out/' + outputName + '.pdf';
+async function addMetaData(outputName, lang, name, version) {
+    let filePath = getFilePath(version, outputName);
 
     await waitForFile(filePath);
 
@@ -169,8 +238,10 @@ function openDirectory(directoryPath) {
 (async () => {
     try {
         const server = await startServer();
-        await printCV('pl');
-        await printCV('en');
+        const versionsNames = await getVersionsNames();
+        for (const version of versionsNames) {
+            await printCVs(version);
+        }
         openDirectory(path.join(__dirname, '/out/'));
         server.close();
     } catch (error) {

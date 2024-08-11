@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const language = document.documentElement.getAttribute('lang');
-    const contentsPath = 'contents/texts/' + language + '/';
+    const url = new URL(window.location.href);
+    const version = url.searchParams.get('version') || 'main';
+    const contentsPath = 'contents/' + version + '/';
+    const textsPath = contentsPath + 'texts/' + language + '/';
+    const headersPath = textsPath + 'headers/';
+    const hrefsPath = contentsPath + 'hrefs/';
+    const photoPath = contentsPath + 'photo/photo.jpg';
+    const technologiesPath = contentsPath + 'technologies/';
+    const stylesPath = contentsPath + '/styles/style_' + language + '.css';
+
 
     const contents = [
         {id: 'name', file: 'name.txt'},
@@ -38,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {id: 'location-header', file: 'location.txt'}
     ];
 
-    const loadFile = (id, file) => {
-        fetch(contentsPath + file)
+    const loadTexts = (id, file) => {
+        fetch(textsPath + file)
             .then(response => response.text())
             .then(data => {
                 document.getElementById(id).innerHTML = data;
@@ -48,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const loadHrefs = (id, file) => {
-        fetch('contents/hrefs/' + file)
+        fetch(hrefsPath + file)
             .then(response => response.text())
             .then(data => {
                 document.getElementById(id).href = data;
@@ -57,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const loadHeaders = (id, file) => {
-        fetch(contentsPath + 'headers/' + file)
+        fetch(headersPath + file)
             .then(response => response.text())
             .then(data => {
                 document.getElementById(id).innerHTML = data;
@@ -65,22 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error(`Błąd podczas ładowania pliku ${file}:`, error));
     };
 
-    fetch('contents/technologies/technologies-list.html')
+    fetch(technologiesPath + 'technologies-list.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('technologies-list').innerHTML = data;
         })
         .catch(error => console.error(`Błąd podczas ładowania pliku technologies-list.html:`, error));
-
-    contents.forEach(({id, file}) => loadFile(id, file));
-    hrefs.forEach(({id, file}) => loadHrefs(id, file));
-    headers.forEach(({id, file}) => loadHeaders(id, file));
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = "text/css"
-    link.href = '/styles/style_' + language + '.css';
-    document.head.appendChild(link);
 
     fetch(contentsPath + 'name.txt')
         .then(response => response.text())
@@ -89,4 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error(`Błąd podczas ładowania pliku name.txt:`, error));
 
+    contents.forEach(({id, file}) => loadTexts(id, file));
+    hrefs.forEach(({id, file}) => loadHrefs(id, file));
+    headers.forEach(({id, file}) => loadHeaders(id, file));
+
+    document.getElementById("photo").src = photoPath;
+
+    function checkStyleFileExists() {
+        return fetch(stylesPath, { method: 'HEAD' })
+            .then(response => response.ok)
+            .catch(() => false);
+    }
+
+    checkStyleFileExists().then(exists => {
+        if (exists) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = stylesPath;
+            document.head.appendChild(link);
+        }
+    });
 });
