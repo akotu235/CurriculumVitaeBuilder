@@ -136,6 +136,8 @@ async function printCV(lang, version) {
 
     console.log(`Generating: ${outputName} (${version})`);
 
+    createDirectoryIfNotExists(path.join(__dirname, '/out'));
+
     if (version !== 'main') {
         const dirPath = path.join(__dirname, '/out/' + version)
         createDirectoryIfNotExists(dirPath);
