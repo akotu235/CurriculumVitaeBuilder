@@ -93,7 +93,7 @@ function getVersionsNames() {
             }
 
             const folderNames = files
-                .filter(file => file.isDirectory())
+                .filter(file => file.isDirectory() && !file.name.startsWith('.'))
                 .map(folder => folder.name);
 
             resolve(folderNames);
