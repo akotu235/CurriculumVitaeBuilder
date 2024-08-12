@@ -32,7 +32,7 @@ W katalogu `photo` umieść swoje zdjęcie o nazwie `photo.jpg`. To zdjęcie zos
 
 Style dokumentu są zarządzane za pomocą plików CSS, które umożliwiają dostosowanie różnych aspektów wyglądu. Aby edytować wygląd swojego CV, możesz wprowadzać zmiany w kilku miejscach:
 1. Ogólne Style:
-    * Zmiany globalnych styli wprowadzasz w pliku `style.css` znajdującym się w katalogu `styles`.
+    * Zmiany globalnych styli wprowadzasz w pliku `global_styles.css` znajdującym się w katalogu `contents`.
 2. Style Specyficzne dla Wersji:
     * Jeśli chcesz dostosować wygląd dla konkretnej wersji językowej, edytuj odpowiednie pliki w katalogu `contents/<nazwa_wersji>/styles/`. Pliki mają format `style_<lang>.css`, gdzie `<nazwa_wersji>` to nazwa wersji, a `<lang>` to kod języka (np. `pl` dla polskiego, `en` dla angielskiego).
 

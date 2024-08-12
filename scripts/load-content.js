@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const photoPath = contentsPath + 'photo/photo.jpg';
     const technologiesPath = contentsPath + 'technologies/';
     const stylesPath = contentsPath + '/styles/style_' + language + '.css';
+    const globalStylesPath = 'contents/global_styles.css';
 
 
     const contents = [
@@ -109,4 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.head.appendChild(link);
         }
     });
+
+    const globalStylesLink = document.createElement('link');
+    globalStylesLink.rel = 'stylesheet';
+    globalStylesLink.type = 'text/css';
+    globalStylesLink.href = globalStylesPath;
+    document.head.appendChild(globalStylesLink);
 });
