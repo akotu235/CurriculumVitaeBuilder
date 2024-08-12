@@ -59,14 +59,21 @@ Po zakończeniu działania skryptu katalog z wygenerowanymi plikami PDF zostanie
 
 Aby dodać nową wersję CV (np. dla konkretnego stanowiska), postępuj zgodnie z poniższymi krokami:
 
-1. Utwórz Nowy Katalog:
-   * Stwórz nowy katalog w lokalizacji `contents` o nazwie odpowiadającej nowej wersji.
-2. Skopiuj Zawartość:
-   * Skopiuj zawartość katalogu `contents/main` do nowo utworzonego katalogu.
-3. Dostosuj Treści i Style:
+1. Zainicjuj Nową Wersję CV:
+   * Wykonaj poniższe polecenie, aby utworzyć nową wersję CV na podstawie wersji głównej:
+   
+   ```sh
+   npx new-cv-version
+   ```
+
+   Polecenie to utworzy nową wersję CV w katalogu contents o podanej nazwie.
+
+2. Dostosuj Treści i Style:
    * Dostosuj treści oraz style w nowym katalogu, aby odpowiadały specyfice nowej wersji.
-4. Wydrukuj do PDF:
+
+3. Wydrukuj do PDF:
    * Użyj poniższego polecenia, aby wygenerować pliki PDF:
+
    ```sh
    npx cv-build
    ```
