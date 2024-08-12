@@ -1,5 +1,24 @@
 # Curriculum Vitae Builder <small><sub>by akotu</sub></small>
 
+## Wymagania Wstępne
+
+Upewnij się, że masz zainstalowane `Node.js` oraz `npm`. Jeśli nie, pobierz i zainstaluj Node.js z [oficjalnej strony](https://nodejs.org/), co automatycznie zainstaluje npm.
+
+## Instalacja
+
+1. **Utwórz nowy katalog dla swojego projektu CV** (jeśli jeszcze go nie masz):
+
+   ```sh
+   mkdir my-cv
+   cd my-cv
+   ```
+
+2. **Zainstaluj pakiet cv-builder**:
+
+   ```sh
+   npm install cv-builder
+   ```
+
 ## Edytowanie Treści
 
 Aby dodać treść swojego CV, edytuj odpowiednie pliki znajdujące się w katalogu `contents`. Po wprowadzeniu zmian w tych plikach możesz przejść do kroku generowania pliku PDF.
@@ -19,36 +38,17 @@ Style dokumentu są zarządzane za pomocą plików CSS, które umożliwiają dos
 
 Przykład ścieżki do pliku styli dla wersji polskiej:
 
-```sh
-contents/main/styles/style_pl.css
-```
+   ```sh
+   contents/main/styles/style_pl.css
+   ```
 
 ## Drukowanie do PDF
 
-Aby wygenerować plik PDF, postępuj zgodnie z poniższymi krokami:
+Aby wygenerować pliki PDF, uruchom poniższe polecenie:
 
-### Wymagania Wstępne
-
-Upewnij się, że masz zainstalowane Node.js oraz npm. Jeśli nie, pobierz i zainstaluj Node.js z [oficjalnej strony](https://nodejs.org/), co automatycznie zainstaluje npm.
-
-### Instalacja Zależności
-
-1. Otwórz terminal i przejdź do katalogu, w którym znajduje się plik `package.json`.
-2. Uruchom polecenie:
-
-```sh
-npm install
-```
-
-To polecenie pobierze i zainstaluje wszystkie zależności potrzebne do działania skryptu.
-
-### Uruchamianie Skryptu
-
-Po zainstalowaniu zależności możesz uruchomić skrypt do generowania pliku PDF:
-
-```sh
-node print_to_pdf.js
-```
+   ```sh
+   npx cv-build
+   ```
 Po zakończeniu działania skryptu katalog z wygenerowanymi plikami PDF zostanie automatycznie otwarty.
 
 ## Przykład
@@ -66,10 +66,10 @@ Aby dodać nową wersję CV (np. dla konkretnego stanowiska), postępuj zgodnie 
 3. Dostosuj Treści i Style:
    * Dostosuj treści oraz style w nowym katalogu, aby odpowiadały specyfice nowej wersji.
 4. Wydrukuj do PDF:
-   * Użyj poniższego polecenia, aby wygenerować PDF:
-```sh
-node print_to_pdf.js
-```
+   * Użyj poniższego polecenia, aby wygenerować pliki PDF:
+   ```sh
+   npx cv-build
+   ```
 
 ## License
 Distributed under the MIT License. See [LICENSE](https://github.com/akotu235/CurriculumVitaeBuilder/blob/master/LICENSE) for more information.

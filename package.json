@@ -1,9 +1,49 @@
 {
-  "dependencies": {
-    "puppeteer": "^23.0.0"
+  "name": "cv-builder",
+  "version": "1.0.14",
+  "description": "Narzędzie do generowania profesjonalnych CV w formacie PDF. Personalizuj treść, dodaj zdjęcie i generuj interaktywne dokumenty PDF z aktywnymi linkami. ",
+  "main": "print_to_pdf.js",
+  "bin": {
+    "cv-build": "./print_to_pdf.js"
   },
-  "devDependencies": {
+  "scripts": {
+    "start": "node print_to_pdf.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node copy-contents.js"
+  },
+  "dependencies": {
     "http-server": "^14.1.1",
-    "pdf-lib": "^1.17.1"
-  }
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^23.0.0",
+    "fs-extra": "^11.2.0"
+  },
+  "files": [
+    "contents/",
+    "images/",
+    "scripts/",
+    "styles/",
+    "index.html",
+    "LICENSE",
+    "package.json",
+    "print_to_pdf.js",
+    "README.md",
+    "copy-contents.js"
+  ],
+  "keywords": [
+    "pdf",
+    "puppeteer",
+    "print",
+    "cv",
+    "cv-builder"
+  ],
+  "author": "Andrzej",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akotu235/CurriculumVitaeBuilder"
+  },
+  "bugs": {
+    "url": "https://akotu235.github.io/"
+  },
+  "homepage": "https://github.com/akotu235/CurriculumVitaeBuilder#readme"
 }

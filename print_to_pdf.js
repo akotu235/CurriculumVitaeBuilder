@@ -1,11 +1,14 @@
+#!/usr/bin/env node
+
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const {PDFDocument} = require('pdf-lib');
 const {exec} = require('child_process');
 const os = require('os');
 const path = require('path');
 const url = require('url');
 const http = require('http');
+const fs = require('fs-extra');
+
 
 const port = 8888;
 const templateFile = 'index.html'
@@ -64,7 +67,7 @@ function startServer() {
 
 
 function getFilePath(version, outputName) {
-    let filePath = 'out/';
+    let filePath = path.join(__dirname, '/../../out/');
     if (version === 'main') {
         return filePath + outputName + '.pdf';
     } else {
@@ -134,12 +137,12 @@ async function printCV(lang, version) {
 
     const outputName = name.replace(/ /g, '_') + '_CV_' + language;
 
-    console.log(`Generating: ${outputName} (${version})`);
+    console.log(`Generating: ${outputName}.pdf (${version})`);
 
-    createDirectoryIfNotExists(path.join(__dirname, '/out'));
+    createDirectoryIfNotExists(path.join(__dirname, '/../../out'));
 
     if (version !== 'main') {
-        const dirPath = path.join(__dirname, '/out/' + version)
+        const dirPath = path.join(__dirname, '/../../out/' + version)
         createDirectoryIfNotExists(dirPath);
     }
 
@@ -239,12 +242,18 @@ function openDirectory(directoryPath) {
 
 (async () => {
     try {
+        const sourceDir = path.join(__dirname, "..", "..", "contents");
+        const targetDir = path.join(__dirname, 'contents');
+
+        await fs.copy(sourceDir, targetDir)
+            .catch(err => console.error('Błąd podczas kopiowania plików:', err));
+
         const server = await startServer();
         const versionsNames = await getVersionsNames();
         for (const version of versionsNames) {
             await printCVs(version);
         }
-        openDirectory(path.join(__dirname, '/out/'));
+        openDirectory(path.join(__dirname, '/../../out/'));
         server.close();
     } catch (error) {
         console.error('Error:', error);
