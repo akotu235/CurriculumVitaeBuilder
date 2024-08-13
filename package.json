@@ -1,6 +1,6 @@
 {
   "name": "cv-builder",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Narzędzie do generowania profesjonalnych CV w formacie PDF. Personalizuj treść, dodaj zdjęcie i generuj interaktywne dokumenty PDF z aktywnymi linkami. ",
   "main": "print-to-pdf.js",
   "bin": {

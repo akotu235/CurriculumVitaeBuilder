@@ -40,53 +40,6 @@ hr {
     width: 100%;
 }
 
-.container {
-    flex: 1;
-    align-content: space-between;
-    background: #FAFAFA;
-    border-radius: 10px;
-    border: 1px solid #888888;
-    margin: 10px;
-    padding: 10px;
-}
-
-.section {
-    display: flex;
-}
-
-.title {
-    flex: 1;
-    align-content: space-between;
-    display: inline-flex;
-    align-items: center;
-    background: #F0F0F0;
-    border-radius: 10px;
-    border: 1px solid #888888;
-    margin: 10px;
-    padding: 8px;
-}
-
-#photo {
-    border-radius: 100%;
-    margin: 10px 40px 10px 40px;
-    border: 1px solid #888888;
-}
-
-.logo {
-    display: inline-flex;
-    border-radius: 15px;
-    padding: 5px 8px;
-    margin: 3px auto;
-    font-size: 13px;
-    background: white;
-    border: 1px solid #888888;
-}
-
-.logo-svg {
-    height: 15px;
-    padding: 0 5px 0 0;
-}
-
 .text {
     font-size: 13px;
     margin-bottom: 2px;
@@ -102,14 +55,43 @@ hr {
     padding: 10px;
 }
 
-.education-date {
-    width: 80px;
-    text-align: center;
-}
-
 .link {
     text-decoration: none;
     color: black;
+}
+
+.container {
+    flex: 1;
+    align-content: space-between;
+    background: #FAFAFA;
+    border-radius: 10px;
+    border: 1px solid #888888;
+    margin: 8px;
+    padding: 10px;
+}
+
+.section {
+    display: flex;
+}
+
+.title {
+    display: inline-flex;
+    align-items: center;
+    background: #F0F0F0;
+    padding: 8px;
+}
+
+#photo {
+    border-radius: 100%;
+    margin: 10px 40px 10px 40px;
+    border: 1px solid #888888;
+    width: 80px;
+    height: 80px;
+}
+
+.name {
+    font-family: verdana, serif;
+    font-size: 16px;
 }
 
 .contact {
@@ -132,13 +114,9 @@ hr {
     padding: 0 10px;
 }
 
-.work td {
-    padding: 8px 20px;
-    text-align: left;
-}
-
-.work {
-    width: 100%;
+.education-date {
+    width: 80px;
+    text-align: center;
 }
 
 .language {
@@ -156,7 +134,6 @@ hr {
     height: 40px;
 }
 
-
 .degree {
     display: flex;
     align-items: center;
@@ -166,25 +143,28 @@ hr {
     padding: 9px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
+.badge {
+    display: inline-flex;
+    border-radius: 15px;
+    padding: 5px 8px;
+    margin: 3px auto;
+    font-size: 13px;
+    background: white;
+    border: 1px solid #888888;
 }
 
-.name {
-    font-family: verdana, serif;
-    font-size: 16px;
+.logo-svg {
+    height: 15px;
+    padding: 0 5px 0 0;
 }
 
-.brands {
-    display: flex;
-    justify-content: right;
-    margin-right: 10px;
+.work td {
+    padding: 8px 20px;
+    text-align: left;
 }
 
-.brand {
-    max-height: 21px;
-    margin: 0 8px;
+.work {
+    width: 100%;
 }
 
 .agreement {
