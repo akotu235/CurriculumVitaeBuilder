@@ -244,7 +244,7 @@ function openDirectory(directoryPath) {
     try {
         const sourceDir = path.join(__dirname, "..", "..", "contents");
         const targetDir = path.join(__dirname, 'contents');
-
+        await fs.emptyDir(targetDir);
         await fs.copy(sourceDir, targetDir)
             .catch(err => console.error('Błąd podczas kopiowania plików:', err));
 
