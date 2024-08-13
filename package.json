@@ -1,6 +1,6 @@
 {
   "name": "cv-builder",
-  "version": "1.0.21",
+  "version": "1.0.23",
   "description": "Narzędzie do generowania profesjonalnych CV w formacie PDF. Personalizuj treść, dodaj zdjęcie i generuj interaktywne dokumenty PDF z aktywnymi linkami. ",
   "main": "print-to-pdf.js",
   "bin": {
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node print-to-pdf.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node copy-contents.js"
+    "postinstall": "node post-install-copy-contents.js"
   },
   "dependencies": {
     "http-server": "^14.1.1",
@@ -29,7 +29,7 @@
     "print-to-pdf.js",
     "README.md",
     "init-new-version.js",
-    "copy-contents.js"
+    "post-install-copy-contents.js"
   ],
   "keywords": [
     "pdf",

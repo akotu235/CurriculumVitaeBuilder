@@ -6,7 +6,7 @@ const path = require('path');
 const sourceDir = path.join(__dirname, 'contents');
 const targetDir = path.join(__dirname, '..', '..', 'contents');
 
-async function copyContents() {
+async function postInstallCopyContents() {
     try {
         const targetExists = await fs.pathExists(targetDir);
         if (targetExists) {
@@ -18,4 +18,4 @@ async function copyContents() {
     }
 }
 
-copyContents();
+postInstallCopyContents();
